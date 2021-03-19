@@ -28,4 +28,4 @@ You can add your own initialisation scripts, the following variables are known:
 | $POSTSCALER | the index of the selected postscaler as binary number | 0b01 (second item is selected) |
 | $POSTSCALER_NAME  | name of the postscaler as displayed in the dropdown | 1:4 |
 | $TICKS | amount of ticks required | 210 |
-| $PRELOAD  | 255 - $TICKS, therefore the preload value | 45 |
+| $PRELOAD  | 255 - $TICKS, thus the preload value | 45 |
