@@ -12,7 +12,7 @@ git clone https://github.com/dxstiny/cs-timerCalc.git
 
 ## Quick Overview
 
-Simply enter the desired interrupt delay, select a [predefined](settings) timer and hit 'Calculate'
+Simply enter the desired interrupt delay, select a [predefined](#settings) timer and hit 'Calculate'
 ![Main](githubRessources/main.png)
 You can use manually selected scalers by unchecking the "Calculate scaler" option; this can be useful if you need to provide different delays with the same scalers.
 If the timer does not support such high delays, you can use Scaler Override and enter a custom scaler that you would implement as a variable that is incremented on interrupt. Note that when using Scaler Override, the prescaler and postscaler are processed as if they were set to 1:1
