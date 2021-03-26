@@ -64,6 +64,7 @@ namespace TimerCalc
             double fosc = Convert.ToDouble(txtFosc.Text);
             double target = Convert.ToDouble(txtTarget.Text);
             double minTick = 4 / fosc;
+            log("Mode: Calculate Timer");
             log($"min-tick: {minTick}");
             double minOverflow = minTick * 256;
             log($"min-overflow: {minOverflow}");
@@ -131,7 +132,7 @@ namespace TimerCalc
                 {
                     int scaler = pstscaler * prscaler;
 
-                    if (scaler > trueScaler)
+                    if (scaler >= trueScaler)
                     {
                         if (bestDiff > scaler - trueScaler)
                         {
@@ -436,6 +437,110 @@ namespace TimerCalc
             {
                 return timerCodes[timer];
             }
+        }
+
+        private void pgTimer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void calculatePWM()
+        {
+            double fosc = Convert.ToDouble(txtFosc.Text);
+            double target = 1 / Convert.ToDouble(txtPWMInFreq.Text);
+            double minTick = 4 / fosc;
+
+            log("Mode: Calculate PWM");
+            log($"min-tick: {minTick}");
+            double minOverflow = minTick * 256;
+            log($"min-overflow: {minOverflow}");
+            double trueScaler = target / minOverflow;
+            log($"true-Scaler: {trueScaler}");
+
+            int freq = Convert.ToInt32(txtPWMInFreq.Text);
+            int scaler = getPWMScaler(freq, trueScaler);
+            log($"scaler: {scaler}");
+            double timerTick = minTick * scaler;
+            log($"timer-tick: {timerTick}");
+            double timerOverflow = timerTick * 256;
+            log($"timer-overflow: {timerOverflow}");
+
+            int ticks = (int)Math.Round(target / timerTick) - 1;
+            log($"ticks: {ticks}");
+
+            int duty = (int)txtPWMDuty.Value;
+            duty *= 4 * (ticks + 1);
+            duty /= 100;
+            log($"duty-cycle: {duty}");
+
+            double actualTime = ticks * timerTick;
+            log($"actual-time: {actualTime}");
+            double actualFreq = 1 / actualTime;
+            log($"actual-freq: {1 / actualTime}");
+
+            double deviation = Math.Abs(actualFreq - freq);
+            log($"deviation: {deviation}");
+
+            double accuracy = 100.0 / freq * actualFreq;
+            log($"accuracy: {accuracy}");
+
+            drpPWMPrescaler.SelectedIndex = drpPWMPrescaler.Items.IndexOf($"1:{scaler}");
+            txtPWMOutPR2.Text = ticks.ToString();
+            txtPWMOutDuty.Text = duty.ToString();
+            txtPWMOutFreq.Text = actualFreq.ToString();
+            txtAccuracy.Text = accuracy.ToString();
+        }
+
+        private int getPWMScaler(int frequency, double trueScaler)
+        {
+            if (!chkPWMCalcScalers.Checked)
+            {
+                return parseScaler(drpPWMPrescaler.Text);
+            }
+
+            /*
+            foreach (var scaler in drpPWMPrescaler.Items)
+            {
+                int prscaler = parseScaler(scaler as string);
+
+                if (prscaler >= (int)(Math.Ceiling(trueScaler)))
+                {
+                    return prscaler;
+                }
+            }*/
+
+            return getPrescaler(frequency); 
+        }
+
+        long calcPR2(int freq, int prescale)
+        {
+            long a = Convert.ToInt64(txtFosc.Text) / (freq);
+            a /= (4 * prescale);
+            a--;
+
+            return a;
+        }
+
+        int getPR2(int freq, char prescale)
+        {
+            long pr2 = calcPR2(freq, prescale);
+
+            return pr2 > 255 ? 255 : (int)pr2;
+        }
+
+        int getPrescaler(int freq)
+        {
+            int i = 1;
+
+            for (i = 1; i <= 64 && calcPR2(freq, i) > 255; i *= 4) ;
+
+            return i > 64 ? i / 4 : i;
+        }
+
+        private void btnPWMCalc_Click(object sender, EventArgs e)
+        {
+            log("------------------------------------");
+            calculatePWM();
         }
     }
 

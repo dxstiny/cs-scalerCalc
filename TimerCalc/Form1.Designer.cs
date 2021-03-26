@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Timers");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Timers");
             this.txtTarget = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,7 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pgTimer = new System.Windows.Forms.TabPage();
             this.txtFormattedCode = new System.Windows.Forms.TextBox();
             this.chckCalcScalers = new System.Windows.Forms.CheckBox();
             this.txtAccuracy = new System.Windows.Forms.TextBox();
@@ -57,36 +57,60 @@
             this.txtSteps = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnRemoveNode = new System.Windows.Forms.Button();
+            this.pgSettings = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.treeView = new System.Windows.Forms.TreeView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.txtSettingsAdd = new System.Windows.Forms.TextBox();
             this.btnAddPostscaler = new System.Windows.Forms.Button();
             this.btnAddPrescaler = new System.Windows.Forms.Button();
             this.btnAddTimer = new System.Windows.Forms.Button();
-            this.txtSettingsAdd = new System.Windows.Forms.TextBox();
-            this.treeView = new System.Windows.Forms.TreeView();
+            this.btnRemoveNode = new System.Windows.Forms.Button();
+            this.txtTimerCode = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.timerCode = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSaveConfig = new System.Windows.Forms.Button();
             this.txtFosc = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pgLog = new System.Windows.Forms.TabPage();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timerCode = new System.Windows.Forms.ComboBox();
-            this.txtTimerCode = new System.Windows.Forms.TextBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnSaveConfig = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pgPwm = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnPWMCalc = new System.Windows.Forms.Button();
+            this.txtPWMInFreq = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtPWMDuty = new System.Windows.Forms.NumericUpDown();
+            this.txtPWMOutAccuracy = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtPWMOutDeviation = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtPWMOutFreq = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtPWMOutDuty = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtPWMOutPR2 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.drpPWMPrescaler = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.chkPWMCalcScalers = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.pgTimer.SuspendLayout();
+            this.pgSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.pgLog.SuspendLayout();
+            this.pgPwm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPWMDuty)).BeginInit();
             this.SuspendLayout();
             // 
             // txtTarget
@@ -153,9 +177,10 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.pgTimer);
+            this.tabControl1.Controls.Add(this.pgPwm);
+            this.tabControl1.Controls.Add(this.pgSettings);
+            this.tabControl1.Controls.Add(this.pgLog);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -163,50 +188,51 @@
             this.tabControl1.Size = new System.Drawing.Size(832, 526);
             this.tabControl1.TabIndex = 10;
             // 
-            // tabPage1
+            // pgTimer
             // 
-            this.tabPage1.Controls.Add(this.txtFormattedCode);
-            this.tabPage1.Controls.Add(this.chckCalcScalers);
-            this.tabPage1.Controls.Add(this.txtAccuracy);
-            this.tabPage1.Controls.Add(this.label13);
-            this.tabPage1.Controls.Add(this.txtDeviation);
-            this.tabPage1.Controls.Add(this.label12);
-            this.tabPage1.Controls.Add(this.txtActualPeriod);
-            this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.timer);
-            this.tabPage1.Controls.Add(this.txtScalerOverride);
-            this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.btnCalc);
-            this.tabPage1.Controls.Add(this.txtPreload);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.txtSteps);
-            this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.txtTarget);
-            this.tabPage1.Controls.Add(this.postscaler);
-            this.tabPage1.Controls.Add(this.prescaler);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 424);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Input";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.pgTimer.Controls.Add(this.txtFormattedCode);
+            this.pgTimer.Controls.Add(this.chckCalcScalers);
+            this.pgTimer.Controls.Add(this.txtAccuracy);
+            this.pgTimer.Controls.Add(this.label13);
+            this.pgTimer.Controls.Add(this.txtDeviation);
+            this.pgTimer.Controls.Add(this.label12);
+            this.pgTimer.Controls.Add(this.txtActualPeriod);
+            this.pgTimer.Controls.Add(this.label11);
+            this.pgTimer.Controls.Add(this.label10);
+            this.pgTimer.Controls.Add(this.timer);
+            this.pgTimer.Controls.Add(this.txtScalerOverride);
+            this.pgTimer.Controls.Add(this.label9);
+            this.pgTimer.Controls.Add(this.btnCalc);
+            this.pgTimer.Controls.Add(this.txtPreload);
+            this.pgTimer.Controls.Add(this.label8);
+            this.pgTimer.Controls.Add(this.txtSteps);
+            this.pgTimer.Controls.Add(this.label7);
+            this.pgTimer.Controls.Add(this.label6);
+            this.pgTimer.Controls.Add(this.label1);
+            this.pgTimer.Controls.Add(this.label5);
+            this.pgTimer.Controls.Add(this.label4);
+            this.pgTimer.Controls.Add(this.txtTarget);
+            this.pgTimer.Controls.Add(this.postscaler);
+            this.pgTimer.Controls.Add(this.prescaler);
+            this.pgTimer.Controls.Add(this.label3);
+            this.pgTimer.Location = new System.Drawing.Point(4, 22);
+            this.pgTimer.Name = "pgTimer";
+            this.pgTimer.Padding = new System.Windows.Forms.Padding(3);
+            this.pgTimer.Size = new System.Drawing.Size(824, 500);
+            this.pgTimer.TabIndex = 0;
+            this.pgTimer.Text = "Timer";
+            this.pgTimer.UseVisualStyleBackColor = true;
+            this.pgTimer.Click += new System.EventHandler(this.pgTimer_Click);
             // 
             // txtFormattedCode
             // 
             this.txtFormattedCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtFormattedCode.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtFormattedCode.Location = new System.Drawing.Point(487, 3);
+            this.txtFormattedCode.Location = new System.Drawing.Point(519, 3);
             this.txtFormattedCode.Multiline = true;
             this.txtFormattedCode.Name = "txtFormattedCode";
             this.txtFormattedCode.ReadOnly = true;
-            this.txtFormattedCode.Size = new System.Drawing.Size(302, 418);
+            this.txtFormattedCode.Size = new System.Drawing.Size(302, 494);
             this.txtFormattedCode.TabIndex = 27;
             // 
             // chckCalcScalers
@@ -361,27 +387,71 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Output";
             // 
-            // tabPage2
+            // pgSettings
             // 
-            this.tabPage2.Controls.Add(this.splitContainer1);
-            this.tabPage2.Controls.Add(this.panel1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(824, 500);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Settings";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.pgSettings.Controls.Add(this.splitContainer1);
+            this.pgSettings.Controls.Add(this.panel1);
+            this.pgSettings.Location = new System.Drawing.Point(4, 22);
+            this.pgSettings.Name = "pgSettings";
+            this.pgSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.pgSettings.Size = new System.Drawing.Size(824, 500);
+            this.pgSettings.TabIndex = 1;
+            this.pgSettings.Text = "Settings";
+            this.pgSettings.UseVisualStyleBackColor = true;
             // 
-            // btnRemoveNode
+            // splitContainer1
             // 
-            this.btnRemoveNode.Location = new System.Drawing.Point(367, 3);
-            this.btnRemoveNode.Name = "btnRemoveNode";
-            this.btnRemoveNode.Size = new System.Drawing.Size(75, 20);
-            this.btnRemoveNode.TabIndex = 6;
-            this.btnRemoveNode.Text = "Remove";
-            this.btnRemoveNode.UseVisualStyleBackColor = true;
-            this.btnRemoveNode.Click += new System.EventHandler(this.btnRemoveNode_Click);
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 32);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.treeView);
+            this.splitContainer1.Panel1.Controls.Add(this.panel2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtTimerCode);
+            this.splitContainer1.Panel2.Controls.Add(this.panel3);
+            this.splitContainer1.Size = new System.Drawing.Size(818, 465);
+            this.splitContainer1.SplitterDistance = 465;
+            this.splitContainer1.TabIndex = 10;
+            // 
+            // treeView
+            // 
+            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView.HideSelection = false;
+            this.treeView.Location = new System.Drawing.Point(0, 25);
+            this.treeView.Name = "treeView";
+            treeNode2.Name = "root";
+            treeNode2.Text = "Timers";
+            this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode2});
+            this.treeView.Size = new System.Drawing.Size(465, 440);
+            this.treeView.TabIndex = 7;
+            this.treeView.Validated += new System.EventHandler(this.treeView_Validated);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.txtSettingsAdd);
+            this.panel2.Controls.Add(this.btnAddPostscaler);
+            this.panel2.Controls.Add(this.btnAddPrescaler);
+            this.panel2.Controls.Add(this.btnAddTimer);
+            this.panel2.Controls.Add(this.btnRemoveNode);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(465, 25);
+            this.panel2.TabIndex = 8;
+            // 
+            // txtSettingsAdd
+            // 
+            this.txtSettingsAdd.Location = new System.Drawing.Point(3, 3);
+            this.txtSettingsAdd.Name = "txtSettingsAdd";
+            this.txtSettingsAdd.Size = new System.Drawing.Size(85, 20);
+            this.txtSettingsAdd.TabIndex = 2;
+            this.txtSettingsAdd.Text = "Timer0";
             // 
             // btnAddPostscaler
             // 
@@ -413,27 +483,65 @@
             this.btnAddTimer.UseVisualStyleBackColor = true;
             this.btnAddTimer.Click += new System.EventHandler(this.btnAddTimer_Click);
             // 
-            // txtSettingsAdd
+            // btnRemoveNode
             // 
-            this.txtSettingsAdd.Location = new System.Drawing.Point(3, 3);
-            this.txtSettingsAdd.Name = "txtSettingsAdd";
-            this.txtSettingsAdd.Size = new System.Drawing.Size(85, 20);
-            this.txtSettingsAdd.TabIndex = 2;
-            this.txtSettingsAdd.Text = "Timer0";
+            this.btnRemoveNode.Location = new System.Drawing.Point(367, 3);
+            this.btnRemoveNode.Name = "btnRemoveNode";
+            this.btnRemoveNode.Size = new System.Drawing.Size(75, 20);
+            this.btnRemoveNode.TabIndex = 6;
+            this.btnRemoveNode.Text = "Remove";
+            this.btnRemoveNode.UseVisualStyleBackColor = true;
+            this.btnRemoveNode.Click += new System.EventHandler(this.btnRemoveNode_Click);
             // 
-            // treeView
+            // txtTimerCode
             // 
-            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView.HideSelection = false;
-            this.treeView.Location = new System.Drawing.Point(0, 25);
-            this.treeView.Name = "treeView";
-            treeNode3.Name = "root";
-            treeNode3.Text = "Timers";
-            this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            this.treeView.Size = new System.Drawing.Size(465, 440);
-            this.treeView.TabIndex = 7;
-            this.treeView.Validated += new System.EventHandler(this.treeView_Validated);
+            this.txtTimerCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTimerCode.Location = new System.Drawing.Point(0, 25);
+            this.txtTimerCode.Multiline = true;
+            this.txtTimerCode.Name = "txtTimerCode";
+            this.txtTimerCode.Size = new System.Drawing.Size(349, 440);
+            this.txtTimerCode.TabIndex = 9;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.timerCode);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(349, 25);
+            this.panel3.TabIndex = 10;
+            // 
+            // timerCode
+            // 
+            this.timerCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.timerCode.FormattingEnabled = true;
+            this.timerCode.Location = new System.Drawing.Point(3, 3);
+            this.timerCode.Name = "timerCode";
+            this.timerCode.Size = new System.Drawing.Size(90, 21);
+            this.timerCode.TabIndex = 8;
+            this.timerCode.SelectedIndexChanged += new System.EventHandler(this.timerCode_SelectedIndexChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnSaveConfig);
+            this.panel1.Controls.Add(this.txtFosc);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(818, 29);
+            this.panel1.TabIndex = 12;
+            // 
+            // btnSaveConfig
+            // 
+            this.btnSaveConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveConfig.Location = new System.Drawing.Point(740, 3);
+            this.btnSaveConfig.Name = "btnSaveConfig";
+            this.btnSaveConfig.Size = new System.Drawing.Size(75, 20);
+            this.btnSaveConfig.TabIndex = 11;
+            this.btnSaveConfig.Text = "Save Config";
+            this.btnSaveConfig.UseVisualStyleBackColor = true;
+            this.btnSaveConfig.Click += new System.EventHandler(this.btnSaveConfig_Click);
             // 
             // txtFosc
             // 
@@ -452,16 +560,16 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "FOSC [Hz]";
             // 
-            // tabPage3
+            // pgLog
             // 
-            this.tabPage3.Controls.Add(this.txtLog);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(792, 424);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Log";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.pgLog.Controls.Add(this.txtLog);
+            this.pgLog.Location = new System.Drawing.Point(4, 22);
+            this.pgLog.Name = "pgLog";
+            this.pgLog.Padding = new System.Windows.Forms.Padding(3);
+            this.pgLog.Size = new System.Drawing.Size(824, 500);
+            this.pgLog.TabIndex = 2;
+            this.pgLog.Text = "Log";
+            this.pgLog.UseVisualStyleBackColor = true;
             // 
             // txtLog
             // 
@@ -471,7 +579,7 @@
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(786, 418);
+            this.txtLog.Size = new System.Drawing.Size(818, 494);
             this.txtLog.TabIndex = 0;
             // 
             // timer1
@@ -479,87 +587,229 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // timerCode
+            // pgPwm
             // 
-            this.timerCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.timerCode.FormattingEnabled = true;
-            this.timerCode.Location = new System.Drawing.Point(3, 3);
-            this.timerCode.Name = "timerCode";
-            this.timerCode.Size = new System.Drawing.Size(90, 21);
-            this.timerCode.TabIndex = 8;
-            this.timerCode.SelectedIndexChanged += new System.EventHandler(this.timerCode_SelectedIndexChanged);
+            this.pgPwm.Controls.Add(this.chkPWMCalcScalers);
+            this.pgPwm.Controls.Add(this.label24);
+            this.pgPwm.Controls.Add(this.drpPWMPrescaler);
+            this.pgPwm.Controls.Add(this.txtPWMOutPR2);
+            this.pgPwm.Controls.Add(this.label23);
+            this.pgPwm.Controls.Add(this.txtPWMOutDuty);
+            this.pgPwm.Controls.Add(this.label22);
+            this.pgPwm.Controls.Add(this.txtPWMOutAccuracy);
+            this.pgPwm.Controls.Add(this.label17);
+            this.pgPwm.Controls.Add(this.txtPWMOutDeviation);
+            this.pgPwm.Controls.Add(this.label18);
+            this.pgPwm.Controls.Add(this.txtPWMOutFreq);
+            this.pgPwm.Controls.Add(this.label19);
+            this.pgPwm.Controls.Add(this.label20);
+            this.pgPwm.Controls.Add(this.label21);
+            this.pgPwm.Controls.Add(this.txtPWMDuty);
+            this.pgPwm.Controls.Add(this.label16);
+            this.pgPwm.Controls.Add(this.txtPWMInFreq);
+            this.pgPwm.Controls.Add(this.label15);
+            this.pgPwm.Controls.Add(this.btnPWMCalc);
+            this.pgPwm.Controls.Add(this.label14);
+            this.pgPwm.Location = new System.Drawing.Point(4, 22);
+            this.pgPwm.Name = "pgPwm";
+            this.pgPwm.Padding = new System.Windows.Forms.Padding(3);
+            this.pgPwm.Size = new System.Drawing.Size(824, 500);
+            this.pgPwm.TabIndex = 3;
+            this.pgPwm.Text = "PWM";
+            this.pgPwm.UseVisualStyleBackColor = true;
             // 
-            // txtTimerCode
+            // label14
             // 
-            this.txtTimerCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTimerCode.Location = new System.Drawing.Point(0, 25);
-            this.txtTimerCode.Multiline = true;
-            this.txtTimerCode.Name = "txtTimerCode";
-            this.txtTimerCode.Size = new System.Drawing.Size(349, 440);
-            this.txtTimerCode.TabIndex = 9;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(464, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "NOTE: this feature is currently hardcoded to work only with the PIC16F1787 (or id" +
+    "entical systems)";
             // 
-            // splitContainer1
+            // btnPWMCalc
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 32);
-            this.splitContainer1.Name = "splitContainer1";
+            this.btnPWMCalc.Location = new System.Drawing.Point(8, 138);
+            this.btnPWMCalc.Name = "btnPWMCalc";
+            this.btnPWMCalc.Size = new System.Drawing.Size(190, 23);
+            this.btnPWMCalc.TabIndex = 4;
+            this.btnPWMCalc.Text = "Calculate";
+            this.btnPWMCalc.UseVisualStyleBackColor = true;
+            this.btnPWMCalc.Click += new System.EventHandler(this.btnPWMCalc_Click);
             // 
-            // splitContainer1.Panel1
+            // txtPWMInFreq
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.treeView);
-            this.splitContainer1.Panel1.Controls.Add(this.panel2);
+            this.txtPWMInFreq.Location = new System.Drawing.Point(8, 57);
+            this.txtPWMInFreq.Name = "txtPWMInFreq";
+            this.txtPWMInFreq.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMInFreq.TabIndex = 6;
             // 
-            // splitContainer1.Panel2
+            // label15
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.txtTimerCode);
-            this.splitContainer1.Panel2.Controls.Add(this.panel3);
-            this.splitContainer1.Size = new System.Drawing.Size(818, 465);
-            this.splitContainer1.SplitterDistance = 465;
-            this.splitContainer1.TabIndex = 10;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(114, 60);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(113, 13);
+            this.label15.TabIndex = 7;
+            this.label15.Text = "Target Frequency [Hz]";
             // 
-            // btnSaveConfig
+            // label16
             // 
-            this.btnSaveConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveConfig.Location = new System.Drawing.Point(740, 3);
-            this.btnSaveConfig.Name = "btnSaveConfig";
-            this.btnSaveConfig.Size = new System.Drawing.Size(75, 20);
-            this.btnSaveConfig.TabIndex = 11;
-            this.btnSaveConfig.Text = "Save Config";
-            this.btnSaveConfig.UseVisualStyleBackColor = true;
-            this.btnSaveConfig.Click += new System.EventHandler(this.btnSaveConfig_Click);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(114, 112);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(75, 13);
+            this.label16.TabIndex = 9;
+            this.label16.Text = "Duty Cycle [%]";
             // 
-            // panel1
+            // txtPWMDuty
             // 
-            this.panel1.Controls.Add(this.btnSaveConfig);
-            this.panel1.Controls.Add(this.txtFosc);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(818, 29);
-            this.panel1.TabIndex = 12;
+            this.txtPWMDuty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPWMDuty.Location = new System.Drawing.Point(8, 110);
+            this.txtPWMDuty.Name = "txtPWMDuty";
+            this.txtPWMDuty.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMDuty.TabIndex = 10;
             // 
-            // panel2
+            // txtPWMOutAccuracy
             // 
-            this.panel2.Controls.Add(this.txtSettingsAdd);
-            this.panel2.Controls.Add(this.btnAddPostscaler);
-            this.panel2.Controls.Add(this.btnAddPrescaler);
-            this.panel2.Controls.Add(this.btnAddTimer);
-            this.panel2.Controls.Add(this.btnRemoveNode);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(465, 25);
-            this.panel2.TabIndex = 8;
+            this.txtPWMOutAccuracy.Location = new System.Drawing.Point(8, 296);
+            this.txtPWMOutAccuracy.Name = "txtPWMOutAccuracy";
+            this.txtPWMOutAccuracy.ReadOnly = true;
+            this.txtPWMOutAccuracy.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutAccuracy.TabIndex = 32;
             // 
-            // panel3
+            // label17
             // 
-            this.panel3.Controls.Add(this.timerCode);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(349, 25);
-            this.panel3.TabIndex = 10;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(114, 300);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(69, 13);
+            this.label17.TabIndex = 33;
+            this.label17.Text = "Accuracy [%]";
+            // 
+            // txtPWMOutDeviation
+            // 
+            this.txtPWMOutDeviation.Location = new System.Drawing.Point(8, 270);
+            this.txtPWMOutDeviation.Name = "txtPWMOutDeviation";
+            this.txtPWMOutDeviation.ReadOnly = true;
+            this.txtPWMOutDeviation.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutDeviation.TabIndex = 30;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(114, 274);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(74, 13);
+            this.label18.TabIndex = 31;
+            this.label18.Text = "Deviation [Hz]";
+            // 
+            // txtPWMOutFreq
+            // 
+            this.txtPWMOutFreq.Location = new System.Drawing.Point(8, 244);
+            this.txtPWMOutFreq.Name = "txtPWMOutFreq";
+            this.txtPWMOutFreq.ReadOnly = true;
+            this.txtPWMOutFreq.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutFreq.TabIndex = 28;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(114, 248);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(112, 13);
+            this.label19.TabIndex = 29;
+            this.label19.Text = "Actual Frequency [Hz]";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(10, 164);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(76, 25);
+            this.label20.TabIndex = 27;
+            this.label20.Text = "Output";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(8, 29);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(59, 25);
+            this.label21.TabIndex = 26;
+            this.label21.Text = "Input";
+            // 
+            // txtPWMOutDuty
+            // 
+            this.txtPWMOutDuty.Location = new System.Drawing.Point(8, 192);
+            this.txtPWMOutDuty.Name = "txtPWMOutDuty";
+            this.txtPWMOutDuty.ReadOnly = true;
+            this.txtPWMOutDuty.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutDuty.TabIndex = 34;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(114, 196);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(59, 13);
+            this.label22.TabIndex = 35;
+            this.label22.Text = "Duty Value";
+            // 
+            // txtPWMOutPR2
+            // 
+            this.txtPWMOutPR2.Location = new System.Drawing.Point(8, 218);
+            this.txtPWMOutPR2.Name = "txtPWMOutPR2";
+            this.txtPWMOutPR2.ReadOnly = true;
+            this.txtPWMOutPR2.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutPR2.TabIndex = 36;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(114, 222);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(28, 13);
+            this.label23.TabIndex = 37;
+            this.label23.Text = "PR2";
+            // 
+            // drpPWMPrescaler
+            // 
+            this.drpPWMPrescaler.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.drpPWMPrescaler.FormattingEnabled = true;
+            this.drpPWMPrescaler.Items.AddRange(new object[] {
+            "1:1",
+            "1:4",
+            "1:16",
+            "1:64"});
+            this.drpPWMPrescaler.Location = new System.Drawing.Point(8, 83);
+            this.drpPWMPrescaler.Name = "drpPWMPrescaler";
+            this.drpPWMPrescaler.Size = new System.Drawing.Size(100, 21);
+            this.drpPWMPrescaler.TabIndex = 38;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(114, 86);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(51, 13);
+            this.label24.TabIndex = 39;
+            this.label24.Text = "Prescaler";
+            // 
+            // chkPWMCalcScalers
+            // 
+            this.chkPWMCalcScalers.AutoSize = true;
+            this.chkPWMCalcScalers.Checked = true;
+            this.chkPWMCalcScalers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPWMCalcScalers.Location = new System.Drawing.Point(204, 142);
+            this.chkPWMCalcScalers.Name = "chkPWMCalcScalers";
+            this.chkPWMCalcScalers.Size = new System.Drawing.Size(108, 17);
+            this.chkPWMCalcScalers.TabIndex = 40;
+            this.chkPWMCalcScalers.Text = "Calculate Scalers";
+            this.chkPWMCalcScalers.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -570,21 +820,24 @@
             this.Name = "Form1";
             this.Text = "ScalerCalc";
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.pgTimer.ResumeLayout(false);
+            this.pgTimer.PerformLayout();
+            this.pgSettings.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.pgLog.ResumeLayout(false);
+            this.pgLog.PerformLayout();
+            this.pgPwm.ResumeLayout(false);
+            this.pgPwm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPWMDuty)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -599,14 +852,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage pgTimer;
+        private System.Windows.Forms.TabPage pgSettings;
         private System.Windows.Forms.TextBox txtFosc;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtSteps;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage pgLog;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.TextBox txtPreload;
         private System.Windows.Forms.Label label8;
@@ -637,6 +890,28 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TabPage pgPwm;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown txtPWMDuty;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtPWMInFreq;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btnPWMCalc;
+        private System.Windows.Forms.TextBox txtPWMOutAccuracy;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtPWMOutDeviation;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtPWMOutFreq;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtPWMOutPR2;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txtPWMOutDuty;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox drpPWMPrescaler;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.CheckBox chkPWMCalcScalers;
     }
 }
 
