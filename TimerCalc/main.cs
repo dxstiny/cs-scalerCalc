@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace TimerCalc
+namespace ScalerCalc
 {
-    public partial class Form1 : Form
+    public partial class main : Form
     {
-        public Form1()
+        public main()
         {
             InitializeComponent();
 
@@ -53,116 +53,16 @@ namespace TimerCalc
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
-            double fosc = Convert.ToDouble(txtFosc.Text);
-            double target = Convert.ToDouble(txtTarget.Text);
-            double minTick = 4 / fosc;
-            log("Mode: Calculate Timer");
-            log($"min-tick: {minTick}");
-            double minOverflow = minTick * 256;
-            log($"min-overflow: {minOverflow}");
-            double trueScaler = target / minOverflow;
-            log($"true-Scaler: {trueScaler}");
+            TimerCalc timerCalc = new TimerCalc(txtFosc.Text, txtTarget.Text, prescaler,
+                postscaler, txtScalerOverride.Text, timer.Text, chckCalcScalers.Checked);
 
-            calculatePrescaler(Convert.ToInt32(trueScaler));
-            int scaler = getScaler();
-            log($"scaler: {scaler}");
-            double timerTick = minTick * scaler;
-            log($"timer-tick: {timerTick}");
-            double timerOverflow = timerTick * 256;
-            log($"timer-overflow: {timerOverflow}");
-
-            double ticks = target / timerTick;
-            log($"ticks: {ticks}");
-            txtSteps.Text = Math.Ceiling(ticks).ToString();
-            double preload = 255 - ticks;
-            log($"preload: {preload}");
-            txtPreload.Text = Math.Ceiling(preload).ToString();
-
-            double actualTicks = Math.Ceiling(ticks);
-            actualTicks = actualTicks > 255.0 ? 255.0 : actualTicks;
-            double actual = actualTicks * timerTick;
-
-            log($"actual: {actual}");
-            txtActualPeriod.Text = actual.ToString();
-            double deviation = Math.Abs(target - actual);
-            log($"deviation: {deviation}");
-            txtDeviation.Text = deviation.ToString();
-            double accuracy = 100.0 / target * actual;
-            log($"accuracy: {accuracy}");
-            txtAccuracy.Text = accuracy.ToString();
-
-            log("------------------------------------");
-
-            txtFormattedCode.Text = getTimerCode(timer.Text, prescaler.SelectedIndex, postscaler.SelectedIndex, (int)Math.Ceiling(ticks), (int)Math.Ceiling(preload));
-        }
-
-        private void calculatePrescaler(int trueScaler)
-        {
-            if (!chckCalcScalers.Checked)
-                return;
-
-            List<int> prescalers = new List<int>();
-            List<int> postscalers = new List<int>();
-
-            foreach (object item in prescaler.Items)
-            {
-                prescalers.Add(parseScaler(item as string));
-            }
-
-            foreach (object item in postscaler.Items)
-            {
-                postscalers.Add(parseScaler(item as string));
-            }
-
-            int bestPrescaler = 0;
-            int bestPostscaler = 0;
-            int bestDiff = 999;
-
-            foreach (int pstscaler in postscalers)
-            {
-                foreach (int prscaler in prescalers)
-                {
-                    int scaler = pstscaler * prscaler;
-
-                    if (scaler >= trueScaler)
-                    {
-                        if (bestDiff > scaler - trueScaler)
-                        {
-                            bestDiff = scaler - trueScaler;
-                            bestPostscaler = pstscaler;
-                            bestPrescaler = prscaler;
-                        }
-                    }
-                }
-            }
-
-            postscaler.SelectedIndex = postscalers.IndexOf(bestPostscaler);
-            prescaler.SelectedIndex = prescalers.IndexOf(bestPrescaler);
-
-            prescaler.SelectedIndex = prescaler.SelectedIndex < 0 ? (prescaler.Items.Count - 1) : prescaler.SelectedIndex;
-            postscaler.SelectedIndex = postscaler.SelectedIndex < 0 ? (postscaler.Items.Count - 1) : postscaler.SelectedIndex;
-        }
-
-        private int getScaler()
-        {
-            if (txtScalerOverride.Text != "")
-            {
-                return parseScaler(txtScalerOverride.Text);
-            }
-
-            return parseScaler(prescaler.Text) * parseScaler(postscaler.Text);
-        }
-
-        private int parseScaler(string scaler)
-        {
-            try
-            {
-                return Convert.ToInt32(scaler.Replace("1:", ""));
-            }
-            catch
-            {
-                return 1;
-            }
+            log(timerCalc.logv);
+            txtAccuracy.Text = timerCalc.accuracy.ToString();
+            txtActualPeriod.Text = timerCalc.actual.ToString();
+            txtPreload.Text = Math.Ceiling(timerCalc.preload).ToString();
+            txtFormattedCode.Text = timerCalc.timerCode;
+            txtSteps.Text = Math.Ceiling(timerCalc.ticks).ToString();
+            txtDeviation.Text = timerCalc.deviation.ToString();
         }
 
         private void log(string text)
@@ -397,38 +297,7 @@ namespace TimerCalc
 
         private void timerCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtTimerCode.Text = getTimerCode(timerCode.Text);
-        }
-
-        private string getTimerCode(string timer, int prescalerIndex, int postscalerIndex, int ticks, int preload)
-        {
-            string ret = getTimerCode(timer);
-
-            ret = ret.Replace("$PRESCALER_NAME", prescaler.Items[prescalerIndex].ToString());
-            ret = ret.Replace("$POSTSCALER_NAME", postscaler.Items[postscalerIndex].ToString());
-
-            ret = ret.Replace("$PRESCALER", $"0b{Convert.ToString(prescalerIndex, 2)}");
-            ret = ret.Replace("$POSTSCALER", $"0b{Convert.ToString(postscalerIndex, 2)}");
-
-            ret = ret.Replace("$TICKS", ticks.ToString());
-            ret = ret.Replace("$PRELOAD", preload.ToString());
-
-            return ret;
-        }
-
-        private string getTimerCode(string timer)
-        {
-            string sjson = Properties.Settings.Default.timerCodes;
-            Dictionary<string, string> timerCodes = JsonConvert.DeserializeObject<Dictionary<string, string>>(sjson);
-
-            if (timerCodes is null || !timerCodes.ContainsKey(timer))
-            {
-                return "";
-            }
-            else
-            {
-                return timerCodes[timer];
-            }
+            txtTimerCode.Text = TimerCalc.getTimerCode(timerCode.Text);
         }
 
         private void pgTimer_Click(object sender, EventArgs e)
@@ -436,103 +305,17 @@ namespace TimerCalc
 
         }
 
-        private void calculatePWM()
-        {
-            double fosc = Convert.ToDouble(txtFosc.Text);
-            double target = 1 / Convert.ToDouble(txtPWMInFreq.Text);
-            double minTick = 4 / fosc;
-
-            log("Mode: Calculate PWM");
-            log($"min-tick: {minTick}");
-            double minOverflow = minTick * 256;
-            log($"min-overflow: {minOverflow}");
-            double trueScaler = target / minOverflow;
-            log($"true-Scaler: {trueScaler}");
-
-            int freq = Convert.ToInt32(txtPWMInFreq.Text);
-            int scaler = getPWMScaler(freq, trueScaler);
-            log($"scaler: {scaler}");
-            double timerTick = minTick * scaler;
-            log($"timer-tick: {timerTick}");
-            double timerOverflow = timerTick * 256;
-            log($"timer-overflow: {timerOverflow}");
-
-            int ticks = (int)Math.Round(target / timerTick) - 1;
-            log($"ticks: {ticks}");
-
-            int duty = (int)txtPWMDuty.Value;
-            duty *= 4 * (ticks + 1);
-            duty /= 100;
-            log($"duty-cycle: {duty}");
-
-            double actualTime = ticks * timerTick;
-            log($"actual-time: {actualTime}");
-            double actualFreq = 1 / actualTime;
-            log($"actual-freq: {1 / actualTime}");
-
-            double deviation = Math.Abs(actualFreq - freq);
-            log($"deviation: {deviation}");
-
-            double accuracy = 100.0 / freq * actualFreq;
-            log($"accuracy: {accuracy}");
-
-            drpPWMPrescaler.SelectedIndex = drpPWMPrescaler.Items.IndexOf($"1:{scaler}");
-            txtPWMOutPR2.Text = ticks.ToString();
-            txtPWMOutDuty.Text = duty.ToString();
-            txtPWMOutFreq.Text = actualFreq.ToString();
-            txtAccuracy.Text = accuracy.ToString();
-        }
-
-        private int getPWMScaler(int frequency, double trueScaler)
-        {
-            if (!chkPWMCalcScalers.Checked)
-            {
-                return parseScaler(drpPWMPrescaler.Text);
-            }
-
-            /*
-            foreach (var scaler in drpPWMPrescaler.Items)
-            {
-                int prscaler = parseScaler(scaler as string);
-
-                if (prscaler >= (int)(Math.Ceiling(trueScaler)))
-                {
-                    return prscaler;
-                }
-            }*/
-
-            return getPrescaler(frequency);
-        }
-
-        private long calcPR2(int freq, int prescale)
-        {
-            long a = Convert.ToInt64(txtFosc.Text) / (freq);
-            a /= (4 * prescale);
-            a--;
-
-            return a;
-        }
-
-        private int getPR2(int freq, char prescale)
-        {
-            long pr2 = calcPR2(freq, prescale);
-
-            return pr2 > 255 ? 255 : (int)pr2;
-        }
-
-        private int getPrescaler(int freq)
-        {
-            int i = 1;
-
-            for (i = 1; i <= 64 && calcPR2(freq, i) > 255; i *= 4) ;
-
-            return i > 64 ? i / 4 : i;
-        }
-
         private void btnPWMCalc_Click(object sender, EventArgs e)
         {
-            log("------------------------------------");
-            calculatePWM();
+            PWMCalc pWMCalc = new PWMCalc(txtFosc.Text, txtPWMInFreq.Text, (int)txtPWMDuty.Value, drpPWMPrescaler, chkPWMCalcScalers.Checked);
+            
+            txtPWMOutPR2.Text = pWMCalc.ticks.ToString();
+            txtPWMOutDuty.Text = pWMCalc.duty.ToString();
+            txtPWMOutFreq.Text = pWMCalc.actualFreq.ToString();
+            txtPWMOutAccuracy.Text = pWMCalc.accuracy.ToString();
+            txtPWMOutDeviation.Text = pWMCalc.deviation.ToString();
+            txtPWMCode.Text = pWMCalc.initCode;
+            log(pWMCalc.logv);
         }
     }
 

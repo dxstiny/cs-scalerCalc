@@ -1,6 +1,6 @@
-﻿namespace TimerCalc
+﻿namespace ScalerCalc
 {
-    partial class Form1
+    partial class main
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Timers");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Timers");
             this.txtTarget = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,6 +57,28 @@
             this.txtSteps = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.pgPwm = new System.Windows.Forms.TabPage();
+            this.chkPWMCalcScalers = new System.Windows.Forms.CheckBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.drpPWMPrescaler = new System.Windows.Forms.ComboBox();
+            this.txtPWMOutPR2 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtPWMOutDuty = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtPWMOutAccuracy = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtPWMOutDeviation = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtPWMOutFreq = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtPWMDuty = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtPWMInFreq = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnPWMCalc = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.pgSettings = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView = new System.Windows.Forms.TreeView();
@@ -76,30 +98,11 @@
             this.pgLog = new System.Windows.Forms.TabPage();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.pgPwm = new System.Windows.Forms.TabPage();
-            this.label14 = new System.Windows.Forms.Label();
-            this.btnPWMCalc = new System.Windows.Forms.Button();
-            this.txtPWMInFreq = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtPWMDuty = new System.Windows.Forms.NumericUpDown();
-            this.txtPWMOutAccuracy = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtPWMOutDeviation = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtPWMOutFreq = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txtPWMOutDuty = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.txtPWMOutPR2 = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.drpPWMPrescaler = new System.Windows.Forms.ComboBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.chkPWMCalcScalers = new System.Windows.Forms.CheckBox();
+            this.txtPWMCode = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.pgTimer.SuspendLayout();
+            this.pgPwm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPWMDuty)).BeginInit();
             this.pgSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -109,8 +112,6 @@
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pgLog.SuspendLayout();
-            this.pgPwm.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPWMDuty)).BeginInit();
             this.SuspendLayout();
             // 
             // txtTarget
@@ -387,6 +388,231 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Output";
             // 
+            // pgPwm
+            // 
+            this.pgPwm.Controls.Add(this.txtPWMCode);
+            this.pgPwm.Controls.Add(this.chkPWMCalcScalers);
+            this.pgPwm.Controls.Add(this.label24);
+            this.pgPwm.Controls.Add(this.drpPWMPrescaler);
+            this.pgPwm.Controls.Add(this.txtPWMOutPR2);
+            this.pgPwm.Controls.Add(this.label23);
+            this.pgPwm.Controls.Add(this.txtPWMOutDuty);
+            this.pgPwm.Controls.Add(this.label22);
+            this.pgPwm.Controls.Add(this.txtPWMOutAccuracy);
+            this.pgPwm.Controls.Add(this.label17);
+            this.pgPwm.Controls.Add(this.txtPWMOutDeviation);
+            this.pgPwm.Controls.Add(this.label18);
+            this.pgPwm.Controls.Add(this.txtPWMOutFreq);
+            this.pgPwm.Controls.Add(this.label19);
+            this.pgPwm.Controls.Add(this.label20);
+            this.pgPwm.Controls.Add(this.label21);
+            this.pgPwm.Controls.Add(this.txtPWMDuty);
+            this.pgPwm.Controls.Add(this.label16);
+            this.pgPwm.Controls.Add(this.txtPWMInFreq);
+            this.pgPwm.Controls.Add(this.label15);
+            this.pgPwm.Controls.Add(this.btnPWMCalc);
+            this.pgPwm.Controls.Add(this.label14);
+            this.pgPwm.Location = new System.Drawing.Point(4, 22);
+            this.pgPwm.Name = "pgPwm";
+            this.pgPwm.Padding = new System.Windows.Forms.Padding(3);
+            this.pgPwm.Size = new System.Drawing.Size(824, 500);
+            this.pgPwm.TabIndex = 3;
+            this.pgPwm.Text = "PWM";
+            this.pgPwm.UseVisualStyleBackColor = true;
+            // 
+            // chkPWMCalcScalers
+            // 
+            this.chkPWMCalcScalers.AutoSize = true;
+            this.chkPWMCalcScalers.Checked = true;
+            this.chkPWMCalcScalers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPWMCalcScalers.Location = new System.Drawing.Point(204, 140);
+            this.chkPWMCalcScalers.Name = "chkPWMCalcScalers";
+            this.chkPWMCalcScalers.Size = new System.Drawing.Size(108, 17);
+            this.chkPWMCalcScalers.TabIndex = 11;
+            this.chkPWMCalcScalers.Text = "Calculate Scalers";
+            this.chkPWMCalcScalers.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(114, 112);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(51, 13);
+            this.label24.TabIndex = 39;
+            this.label24.Text = "Prescaler";
+            // 
+            // drpPWMPrescaler
+            // 
+            this.drpPWMPrescaler.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.drpPWMPrescaler.FormattingEnabled = true;
+            this.drpPWMPrescaler.Items.AddRange(new object[] {
+            "1:1",
+            "1:4",
+            "1:16",
+            "1:64"});
+            this.drpPWMPrescaler.Location = new System.Drawing.Point(8, 109);
+            this.drpPWMPrescaler.Name = "drpPWMPrescaler";
+            this.drpPWMPrescaler.Size = new System.Drawing.Size(100, 21);
+            this.drpPWMPrescaler.TabIndex = 4;
+            // 
+            // txtPWMOutPR2
+            // 
+            this.txtPWMOutPR2.Location = new System.Drawing.Point(8, 218);
+            this.txtPWMOutPR2.Name = "txtPWMOutPR2";
+            this.txtPWMOutPR2.ReadOnly = true;
+            this.txtPWMOutPR2.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutPR2.TabIndex = 7;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(114, 222);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(28, 13);
+            this.label23.TabIndex = 37;
+            this.label23.Text = "PR2";
+            // 
+            // txtPWMOutDuty
+            // 
+            this.txtPWMOutDuty.Location = new System.Drawing.Point(8, 192);
+            this.txtPWMOutDuty.Name = "txtPWMOutDuty";
+            this.txtPWMOutDuty.ReadOnly = true;
+            this.txtPWMOutDuty.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutDuty.TabIndex = 6;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(114, 196);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(59, 13);
+            this.label22.TabIndex = 35;
+            this.label22.Text = "Duty Value";
+            // 
+            // txtPWMOutAccuracy
+            // 
+            this.txtPWMOutAccuracy.Location = new System.Drawing.Point(8, 296);
+            this.txtPWMOutAccuracy.Name = "txtPWMOutAccuracy";
+            this.txtPWMOutAccuracy.ReadOnly = true;
+            this.txtPWMOutAccuracy.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutAccuracy.TabIndex = 10;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(114, 300);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(69, 13);
+            this.label17.TabIndex = 33;
+            this.label17.Text = "Accuracy [%]";
+            // 
+            // txtPWMOutDeviation
+            // 
+            this.txtPWMOutDeviation.Location = new System.Drawing.Point(8, 270);
+            this.txtPWMOutDeviation.Name = "txtPWMOutDeviation";
+            this.txtPWMOutDeviation.ReadOnly = true;
+            this.txtPWMOutDeviation.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutDeviation.TabIndex = 9;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(114, 274);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(74, 13);
+            this.label18.TabIndex = 31;
+            this.label18.Text = "Deviation [Hz]";
+            // 
+            // txtPWMOutFreq
+            // 
+            this.txtPWMOutFreq.Location = new System.Drawing.Point(8, 244);
+            this.txtPWMOutFreq.Name = "txtPWMOutFreq";
+            this.txtPWMOutFreq.ReadOnly = true;
+            this.txtPWMOutFreq.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMOutFreq.TabIndex = 8;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(114, 248);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(112, 13);
+            this.label19.TabIndex = 29;
+            this.label19.Text = "Actual Frequency [Hz]";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(10, 164);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(76, 25);
+            this.label20.TabIndex = 27;
+            this.label20.Text = "Output";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(8, 29);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(59, 25);
+            this.label21.TabIndex = 26;
+            this.label21.Text = "Input";
+            // 
+            // txtPWMDuty
+            // 
+            this.txtPWMDuty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPWMDuty.Location = new System.Drawing.Point(8, 83);
+            this.txtPWMDuty.Name = "txtPWMDuty";
+            this.txtPWMDuty.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMDuty.TabIndex = 2;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(114, 85);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(75, 13);
+            this.label16.TabIndex = 9;
+            this.label16.Text = "Duty Cycle [%]";
+            // 
+            // txtPWMInFreq
+            // 
+            this.txtPWMInFreq.Location = new System.Drawing.Point(8, 57);
+            this.txtPWMInFreq.Name = "txtPWMInFreq";
+            this.txtPWMInFreq.Size = new System.Drawing.Size(100, 20);
+            this.txtPWMInFreq.TabIndex = 1;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(114, 60);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(113, 13);
+            this.label15.TabIndex = 7;
+            this.label15.Text = "Target Frequency [Hz]";
+            // 
+            // btnPWMCalc
+            // 
+            this.btnPWMCalc.Location = new System.Drawing.Point(8, 136);
+            this.btnPWMCalc.Name = "btnPWMCalc";
+            this.btnPWMCalc.Size = new System.Drawing.Size(190, 23);
+            this.btnPWMCalc.TabIndex = 3;
+            this.btnPWMCalc.Text = "Calculate";
+            this.btnPWMCalc.UseVisualStyleBackColor = true;
+            this.btnPWMCalc.Click += new System.EventHandler(this.btnPWMCalc_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(464, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "NOTE: this feature is currently hardcoded to work only with the PIC16F1787 (or id" +
+    "entical systems)";
+            // 
             // pgSettings
             // 
             this.pgSettings.Controls.Add(this.splitContainer1);
@@ -424,10 +650,10 @@
             this.treeView.HideSelection = false;
             this.treeView.Location = new System.Drawing.Point(0, 25);
             this.treeView.Name = "treeView";
-            treeNode2.Name = "root";
-            treeNode2.Text = "Timers";
+            treeNode1.Name = "root";
+            treeNode1.Text = "Timers";
             this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.treeView.Size = new System.Drawing.Size(465, 440);
             this.treeView.TabIndex = 7;
             this.treeView.Validated += new System.EventHandler(this.treeView_Validated);
@@ -587,229 +813,16 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // pgPwm
+            // txtPWMCode
             // 
-            this.pgPwm.Controls.Add(this.chkPWMCalcScalers);
-            this.pgPwm.Controls.Add(this.label24);
-            this.pgPwm.Controls.Add(this.drpPWMPrescaler);
-            this.pgPwm.Controls.Add(this.txtPWMOutPR2);
-            this.pgPwm.Controls.Add(this.label23);
-            this.pgPwm.Controls.Add(this.txtPWMOutDuty);
-            this.pgPwm.Controls.Add(this.label22);
-            this.pgPwm.Controls.Add(this.txtPWMOutAccuracy);
-            this.pgPwm.Controls.Add(this.label17);
-            this.pgPwm.Controls.Add(this.txtPWMOutDeviation);
-            this.pgPwm.Controls.Add(this.label18);
-            this.pgPwm.Controls.Add(this.txtPWMOutFreq);
-            this.pgPwm.Controls.Add(this.label19);
-            this.pgPwm.Controls.Add(this.label20);
-            this.pgPwm.Controls.Add(this.label21);
-            this.pgPwm.Controls.Add(this.txtPWMDuty);
-            this.pgPwm.Controls.Add(this.label16);
-            this.pgPwm.Controls.Add(this.txtPWMInFreq);
-            this.pgPwm.Controls.Add(this.label15);
-            this.pgPwm.Controls.Add(this.btnPWMCalc);
-            this.pgPwm.Controls.Add(this.label14);
-            this.pgPwm.Location = new System.Drawing.Point(4, 22);
-            this.pgPwm.Name = "pgPwm";
-            this.pgPwm.Padding = new System.Windows.Forms.Padding(3);
-            this.pgPwm.Size = new System.Drawing.Size(824, 500);
-            this.pgPwm.TabIndex = 3;
-            this.pgPwm.Text = "PWM";
-            this.pgPwm.UseVisualStyleBackColor = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 3);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(464, 13);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "NOTE: this feature is currently hardcoded to work only with the PIC16F1787 (or id" +
-    "entical systems)";
-            // 
-            // btnPWMCalc
-            // 
-            this.btnPWMCalc.Location = new System.Drawing.Point(8, 138);
-            this.btnPWMCalc.Name = "btnPWMCalc";
-            this.btnPWMCalc.Size = new System.Drawing.Size(190, 23);
-            this.btnPWMCalc.TabIndex = 4;
-            this.btnPWMCalc.Text = "Calculate";
-            this.btnPWMCalc.UseVisualStyleBackColor = true;
-            this.btnPWMCalc.Click += new System.EventHandler(this.btnPWMCalc_Click);
-            // 
-            // txtPWMInFreq
-            // 
-            this.txtPWMInFreq.Location = new System.Drawing.Point(8, 57);
-            this.txtPWMInFreq.Name = "txtPWMInFreq";
-            this.txtPWMInFreq.Size = new System.Drawing.Size(100, 20);
-            this.txtPWMInFreq.TabIndex = 6;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(114, 60);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(113, 13);
-            this.label15.TabIndex = 7;
-            this.label15.Text = "Target Frequency [Hz]";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(114, 112);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(75, 13);
-            this.label16.TabIndex = 9;
-            this.label16.Text = "Duty Cycle [%]";
-            // 
-            // txtPWMDuty
-            // 
-            this.txtPWMDuty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPWMDuty.Location = new System.Drawing.Point(8, 110);
-            this.txtPWMDuty.Name = "txtPWMDuty";
-            this.txtPWMDuty.Size = new System.Drawing.Size(100, 20);
-            this.txtPWMDuty.TabIndex = 10;
-            // 
-            // txtPWMOutAccuracy
-            // 
-            this.txtPWMOutAccuracy.Location = new System.Drawing.Point(8, 296);
-            this.txtPWMOutAccuracy.Name = "txtPWMOutAccuracy";
-            this.txtPWMOutAccuracy.ReadOnly = true;
-            this.txtPWMOutAccuracy.Size = new System.Drawing.Size(100, 20);
-            this.txtPWMOutAccuracy.TabIndex = 32;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(114, 300);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(69, 13);
-            this.label17.TabIndex = 33;
-            this.label17.Text = "Accuracy [%]";
-            // 
-            // txtPWMOutDeviation
-            // 
-            this.txtPWMOutDeviation.Location = new System.Drawing.Point(8, 270);
-            this.txtPWMOutDeviation.Name = "txtPWMOutDeviation";
-            this.txtPWMOutDeviation.ReadOnly = true;
-            this.txtPWMOutDeviation.Size = new System.Drawing.Size(100, 20);
-            this.txtPWMOutDeviation.TabIndex = 30;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(114, 274);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(74, 13);
-            this.label18.TabIndex = 31;
-            this.label18.Text = "Deviation [Hz]";
-            // 
-            // txtPWMOutFreq
-            // 
-            this.txtPWMOutFreq.Location = new System.Drawing.Point(8, 244);
-            this.txtPWMOutFreq.Name = "txtPWMOutFreq";
-            this.txtPWMOutFreq.ReadOnly = true;
-            this.txtPWMOutFreq.Size = new System.Drawing.Size(100, 20);
-            this.txtPWMOutFreq.TabIndex = 28;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(114, 248);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(112, 13);
-            this.label19.TabIndex = 29;
-            this.label19.Text = "Actual Frequency [Hz]";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(10, 164);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(76, 25);
-            this.label20.TabIndex = 27;
-            this.label20.Text = "Output";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(8, 29);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(59, 25);
-            this.label21.TabIndex = 26;
-            this.label21.Text = "Input";
-            // 
-            // txtPWMOutDuty
-            // 
-            this.txtPWMOutDuty.Location = new System.Drawing.Point(8, 192);
-            this.txtPWMOutDuty.Name = "txtPWMOutDuty";
-            this.txtPWMOutDuty.ReadOnly = true;
-            this.txtPWMOutDuty.Size = new System.Drawing.Size(100, 20);
-            this.txtPWMOutDuty.TabIndex = 34;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(114, 196);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(59, 13);
-            this.label22.TabIndex = 35;
-            this.label22.Text = "Duty Value";
-            // 
-            // txtPWMOutPR2
-            // 
-            this.txtPWMOutPR2.Location = new System.Drawing.Point(8, 218);
-            this.txtPWMOutPR2.Name = "txtPWMOutPR2";
-            this.txtPWMOutPR2.ReadOnly = true;
-            this.txtPWMOutPR2.Size = new System.Drawing.Size(100, 20);
-            this.txtPWMOutPR2.TabIndex = 36;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(114, 222);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(28, 13);
-            this.label23.TabIndex = 37;
-            this.label23.Text = "PR2";
-            // 
-            // drpPWMPrescaler
-            // 
-            this.drpPWMPrescaler.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.drpPWMPrescaler.FormattingEnabled = true;
-            this.drpPWMPrescaler.Items.AddRange(new object[] {
-            "1:1",
-            "1:4",
-            "1:16",
-            "1:64"});
-            this.drpPWMPrescaler.Location = new System.Drawing.Point(8, 83);
-            this.drpPWMPrescaler.Name = "drpPWMPrescaler";
-            this.drpPWMPrescaler.Size = new System.Drawing.Size(100, 21);
-            this.drpPWMPrescaler.TabIndex = 38;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(114, 86);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(51, 13);
-            this.label24.TabIndex = 39;
-            this.label24.Text = "Prescaler";
-            // 
-            // chkPWMCalcScalers
-            // 
-            this.chkPWMCalcScalers.AutoSize = true;
-            this.chkPWMCalcScalers.Checked = true;
-            this.chkPWMCalcScalers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPWMCalcScalers.Location = new System.Drawing.Point(204, 142);
-            this.chkPWMCalcScalers.Name = "chkPWMCalcScalers";
-            this.chkPWMCalcScalers.Size = new System.Drawing.Size(108, 17);
-            this.chkPWMCalcScalers.TabIndex = 40;
-            this.chkPWMCalcScalers.Text = "Calculate Scalers";
-            this.chkPWMCalcScalers.UseVisualStyleBackColor = true;
+            this.txtPWMCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPWMCode.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtPWMCode.Location = new System.Drawing.Point(519, 3);
+            this.txtPWMCode.Multiline = true;
+            this.txtPWMCode.Name = "txtPWMCode";
+            this.txtPWMCode.ReadOnly = true;
+            this.txtPWMCode.Size = new System.Drawing.Size(302, 494);
+            this.txtPWMCode.TabIndex = 40;
             // 
             // Form1
             // 
@@ -822,6 +835,9 @@
             this.tabControl1.ResumeLayout(false);
             this.pgTimer.ResumeLayout(false);
             this.pgTimer.PerformLayout();
+            this.pgPwm.ResumeLayout(false);
+            this.pgPwm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPWMDuty)).EndInit();
             this.pgSettings.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -835,9 +851,6 @@
             this.panel1.PerformLayout();
             this.pgLog.ResumeLayout(false);
             this.pgLog.PerformLayout();
-            this.pgPwm.ResumeLayout(false);
-            this.pgPwm.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPWMDuty)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -912,6 +925,7 @@
         private System.Windows.Forms.ComboBox drpPWMPrescaler;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.CheckBox chkPWMCalcScalers;
+        private System.Windows.Forms.TextBox txtPWMCode;
     }
 }
 
