@@ -1,15 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TimerCalc
@@ -29,17 +21,17 @@ namespace TimerCalc
                 {
                     Timers obj = JsonConvert.DeserializeObject<Timers>(storage);
 
-                    foreach (var timer in obj.nodes)
+                    foreach (KeyValuePair<string, List<KeyValuePair<string, List<string>>>> timer in obj.nodes)
                     {
                         TreeNode treeNode = new TreeNode();
                         treeNode.Text = timer.Key;
 
-                        foreach (var scaler in timer.Value)
+                        foreach (KeyValuePair<string, List<string>> scaler in timer.Value)
                         {
                             TreeNode child = new TreeNode();
                             child.Text = scaler.Key;
-                            
-                            foreach (var scale in scaler.Value)
+
+                            foreach (string scale in scaler.Value)
                             {
                                 child.Nodes.Add(scale);
                             }
@@ -112,12 +104,12 @@ namespace TimerCalc
             List<int> prescalers = new List<int>();
             List<int> postscalers = new List<int>();
 
-            foreach (var item in prescaler.Items)
+            foreach (object item in prescaler.Items)
             {
                 prescalers.Add(parseScaler(item as string));
             }
 
-            foreach (var item in postscaler.Items)
+            foreach (object item in postscaler.Items)
             {
                 postscalers.Add(parseScaler(item as string));
             }
@@ -126,9 +118,9 @@ namespace TimerCalc
             int bestPostscaler = 0;
             int bestDiff = 999;
 
-            foreach (var pstscaler in postscalers)
+            foreach (int pstscaler in postscalers)
             {
-                foreach (var prscaler in prescalers)
+                foreach (int prscaler in prescalers)
                 {
                     int scaler = pstscaler * prscaler;
 
@@ -191,7 +183,7 @@ namespace TimerCalc
             if (treeView.SelectedNode is null)
                 return;
 
-            var text = txtSettingsAdd.Text.Replace("1:", "");
+            string text = txtSettingsAdd.Text.Replace("1:", "");
             int scaler;
 
             try
@@ -230,7 +222,7 @@ namespace TimerCalc
             if (treeView.SelectedNode is null)
                 return;
 
-            var text = txtSettingsAdd.Text.Replace("1:", "");
+            string text = txtSettingsAdd.Text.Replace("1:", "");
             int scaler;
 
             try
@@ -291,7 +283,7 @@ namespace TimerCalc
         private void btnSaveConfig_Click(object sender, EventArgs e)
         {
             Timers timers = new Timers();
-            var n = treeView.Nodes["root"];
+            TreeNode n = treeView.Nodes["root"];
 
             foreach (TreeNode timer in n.Nodes)
             {
@@ -399,7 +391,7 @@ namespace TimerCalc
                     postscaler.SelectedIndex = 0;
 
                     return;
-                }                
+                }
             }
         }
 
@@ -509,10 +501,10 @@ namespace TimerCalc
                 }
             }*/
 
-            return getPrescaler(frequency); 
+            return getPrescaler(frequency);
         }
 
-        long calcPR2(int freq, int prescale)
+        private long calcPR2(int freq, int prescale)
         {
             long a = Convert.ToInt64(txtFosc.Text) / (freq);
             a /= (4 * prescale);
@@ -521,14 +513,14 @@ namespace TimerCalc
             return a;
         }
 
-        int getPR2(int freq, char prescale)
+        private int getPR2(int freq, char prescale)
         {
             long pr2 = calcPR2(freq, prescale);
 
             return pr2 > 255 ? 255 : (int)pr2;
         }
 
-        int getPrescaler(int freq)
+        private int getPrescaler(int freq)
         {
             int i = 1;
 
@@ -575,7 +567,7 @@ namespace TimerCalc
                     s1 = s1 == "Prescaler" ? "A" : s1;
                     s2 = s2 == "Prescaler" ? "A" : s2;
 
-                    var r = s1.CompareTo(s2);
+                    int r = s1.CompareTo(s2);
                     return r;
                 }
             }
