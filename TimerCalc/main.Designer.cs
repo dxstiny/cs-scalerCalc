@@ -58,6 +58,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.pgPwm = new System.Windows.Forms.TabPage();
+            this.txtPWMCode = new System.Windows.Forms.TextBox();
             this.chkPWMCalcScalers = new System.Windows.Forms.CheckBox();
             this.label24 = new System.Windows.Forms.Label();
             this.drpPWMPrescaler = new System.Windows.Forms.ComboBox();
@@ -98,7 +99,8 @@
             this.pgLog = new System.Windows.Forms.TabPage();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.txtPWMCode = new System.Windows.Forms.TextBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.warningProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabControl1.SuspendLayout();
             this.pgTimer.SuspendLayout();
             this.pgPwm.SuspendLayout();
@@ -112,6 +114,8 @@
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pgLog.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warningProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // txtTarget
@@ -419,6 +423,17 @@
             this.pgPwm.TabIndex = 3;
             this.pgPwm.Text = "PWM";
             this.pgPwm.UseVisualStyleBackColor = true;
+            // 
+            // txtPWMCode
+            // 
+            this.txtPWMCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPWMCode.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtPWMCode.Location = new System.Drawing.Point(519, 3);
+            this.txtPWMCode.Multiline = true;
+            this.txtPWMCode.Name = "txtPWMCode";
+            this.txtPWMCode.ReadOnly = true;
+            this.txtPWMCode.Size = new System.Drawing.Size(302, 494);
+            this.txtPWMCode.TabIndex = 40;
             // 
             // chkPWMCalcScalers
             // 
@@ -813,24 +828,21 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // txtPWMCode
+            // errorProvider
             // 
-            this.txtPWMCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPWMCode.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtPWMCode.Location = new System.Drawing.Point(519, 3);
-            this.txtPWMCode.Multiline = true;
-            this.txtPWMCode.Name = "txtPWMCode";
-            this.txtPWMCode.ReadOnly = true;
-            this.txtPWMCode.Size = new System.Drawing.Size(302, 494);
-            this.txtPWMCode.TabIndex = 40;
+            this.errorProvider.ContainerControl = this;
             // 
-            // Form1
+            // warningProvider
+            // 
+            this.warningProvider.ContainerControl = this;
+            // 
+            // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 526);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Form1";
+            this.Name = "main";
             this.Text = "ScalerCalc";
             this.tabControl1.ResumeLayout(false);
             this.pgTimer.ResumeLayout(false);
@@ -851,6 +863,8 @@
             this.panel1.PerformLayout();
             this.pgLog.ResumeLayout(false);
             this.pgLog.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warningProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -926,6 +940,8 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.CheckBox chkPWMCalcScalers;
         private System.Windows.Forms.TextBox txtPWMCode;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider warningProvider;
     }
 }
 

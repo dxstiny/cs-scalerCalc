@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ScalerCalc
@@ -11,6 +12,8 @@ namespace ScalerCalc
         public main()
         {
             InitializeComponent();
+
+            warningProvider.Icon = SystemIcons.Warning;
 
             treeView.TreeViewNodeSorter = new NodeSorter();
 
@@ -53,6 +56,35 @@ namespace ScalerCalc
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
+            errorProvider.Clear();
+            warningProvider.Clear();
+
+            if (txtTarget.Text == "")
+            {
+                errorProvider.SetError(txtTarget, "cannot be empty");
+                return;
+            }
+            else if (!double.TryParse(txtTarget.Text, out _))
+            {
+                errorProvider.SetError(txtTarget, "NaN");
+                return;
+            }
+            else if (txtFosc.Text == "")
+            {
+                errorProvider.SetError(txtFosc, "cannot be empty");
+                return;
+            }
+            else if (!double.TryParse(txtFosc.Text, out _))
+            {
+                errorProvider.SetError(txtFosc, "NaN");
+                return;
+            }
+            else if (timer.SelectedIndex < 0)
+            {
+                errorProvider.SetError(timer, "no timer selected");
+                return;
+            }
+
             TimerCalc timerCalc = new TimerCalc(txtFosc.Text, txtTarget.Text, prescaler,
                 postscaler, txtScalerOverride.Text, timer.Text, chckCalcScalers.Checked);
 
@@ -63,6 +95,11 @@ namespace ScalerCalc
             txtFormattedCode.Text = timerCalc.timerCode;
             txtSteps.Text = Math.Ceiling(timerCalc.ticks).ToString();
             txtDeviation.Text = timerCalc.deviation.ToString();
+
+            if (int.Parse(txtSteps.Text) > 255)
+            {
+                warningProvider.SetError(txtSteps, "maximum exceeded");
+            }
         }
 
         private void log(string text)
@@ -307,7 +344,29 @@ namespace ScalerCalc
 
         private void btnPWMCalc_Click(object sender, EventArgs e)
         {
-            PWMCalc pWMCalc = new PWMCalc(txtFosc.Text, txtPWMInFreq.Text, (int)txtPWMDuty.Value, drpPWMPrescaler, chkPWMCalcScalers.Checked);
+            if (txtPWMInFreq.Text == "")
+            {
+                errorProvider.SetError(txtPWMInFreq, "cannot be empty");
+                return;
+            }
+            else if (!int.TryParse(txtPWMInFreq.Text, out _))
+            {
+                errorProvider.SetError(txtPWMInFreq, "NaN (has to be integer)");
+                return;
+            }
+            else if (txtFosc.Text == "")
+            {
+                errorProvider.SetError(txtFosc, "cannot be empty");
+                return;
+            }
+            else if (!double.TryParse(txtFosc.Text, out _))
+            {
+                errorProvider.SetError(txtFosc, "NaN");
+                return;
+            }
+
+            PWMCalc pWMCalc = new PWMCalc(txtFosc.Text, txtPWMInFreq.Text,
+                (int)txtPWMDuty.Value, drpPWMPrescaler, chkPWMCalcScalers.Checked);
             
             txtPWMOutPR2.Text = pWMCalc.ticks.ToString();
             txtPWMOutDuty.Text = pWMCalc.duty.ToString();
@@ -316,6 +375,15 @@ namespace ScalerCalc
             txtPWMOutDeviation.Text = pWMCalc.deviation.ToString();
             txtPWMCode.Text = pWMCalc.initCode;
             log(pWMCalc.logv);
+
+            if (int.Parse(txtPWMOutPR2.Text) > 255)
+            {
+                warningProvider.SetError(txtPWMOutPR2, "maximum exceeded");
+            }
+            if (int.Parse(txtPWMOutDuty.Text) > 1023)
+            {
+                warningProvider.SetError(txtPWMOutDuty, "maximum exceeded");
+            }
         }
     }
 
