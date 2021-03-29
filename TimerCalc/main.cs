@@ -91,9 +91,9 @@ namespace ScalerCalc
             log(timerCalc.logv);
             txtAccuracy.Text = timerCalc.accuracy.ToString();
             txtActualPeriod.Text = timerCalc.actual.ToString();
-            txtPreload.Text = Math.Ceiling(timerCalc.preload).ToString();
+            txtPreload.Text = timerCalc.preload.ToString();
             txtFormattedCode.Text = timerCalc.timerCode;
-            txtSteps.Text = Math.Ceiling(timerCalc.ticks).ToString();
+            txtSteps.Text = timerCalc.actualTicks.ToString();
             txtDeviation.Text = timerCalc.deviation.ToString();
 
             if (int.Parse(txtSteps.Text) > 255)

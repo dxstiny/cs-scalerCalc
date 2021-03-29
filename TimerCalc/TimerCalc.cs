@@ -64,12 +64,13 @@ namespace ScalerCalc
 
             ticks = target / timerTick - 1;
             log($"ticks: {ticks}");
-            preload = 255 - ticks;
-            log($"preload: {preload}");
 
-            actualTicks = Math.Ceiling(ticks);
+            actualTicks = Math.Round(ticks);
             actualTicks = actualTicks > 255.0 ? 255.0 : actualTicks;
             actual = actualTicks * timerTick;
+
+            preload = 255 - actualTicks;
+            log($"preload: {preload}");
 
             log($"actual: {actual}");
             deviation = Math.Abs(target - actual);
