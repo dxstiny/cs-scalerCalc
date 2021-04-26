@@ -11,7 +11,7 @@ namespace ScalerCalc
 CCP1CONbits.CCP1M = 0b1100; // pwm mode
 
 PR2 = $TICKS; // reset on value $TICKS
-char duty = $DUTY; // duty cycle: $DUTY_PER %
+int duty = $DUTY; // duty cycle: $DUTY_PER %
 
 CCP1CONbits.DC1B = duty & 0b11; // duty cycle LSB
 CCPR1L = duty >> 2; // duty cycle MSB
